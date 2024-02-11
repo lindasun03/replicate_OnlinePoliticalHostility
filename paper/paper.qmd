@@ -1,0 +1,132 @@
+---
+title: "The Psychology of Online Political Hostility -- How Aggressiveness of People Effects Their Online and Offline Comment Towards Political Incidents"
+author: 
+  - Yiyi Feng, Yingxvan Sun
+date: February 13, 2024
+date-format: long
+format:
+  pdf:
+    toc: true
+    number-sections: true
+number-sections: true
+abstract: "In contemporary society, the widespread influence of the internet and electronic technology has made the online world an indispensable part of daily human life. However, amidst this digitalization, a significant challenge has emerged: the proliferation of hostile online discussion environments. This phenomenon has sparked a fundamental inquiry: why do online interactions consistently exhibit greater hostility than offline communication? What is the relationship between this trend and individuals' inherent aggressiveness? This paper aims to replicate and analyze data from existing studies investigating the statistical disparities in individual behavior during online and offline political discussions. Additionally, it employs secondary research to explore how individuals' levels of aggressiveness correlate with the observed differences in online and offline political discourse."
+bibliography: referencespaper2.bib
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+#### Preamble ####
+# Purpose: Writing a paper titled "The Psychology of Online Political Hostility -- How Aggressiveness of People Effects Their Online and Offline Comment Towards Political Incidents"
+# Author: Yiyi Feng, Yingxvan Sun
+# Date: Febraury 12, 2024
+# Contact: yiyi.feng@mail.utoronto.ca, lindayx.sun@mail.utoronto.ca
+
+####Workspace setup ####
+library(tidyverse)
+library(janitor)
+library(knitr)
+library(ggplot2)
+library(ggpubr)
+library(kableExtra)
+
+#import data
+raw_data_full <-
+  read_csv(
+    file = "../data/analysis_data/combined_cleaned_data.csv",
+    show_col_types = FALSE)
+```
+
+# Introduction
+
+In contemporary society, the widespread influence of the internet and electronic technology has made the online world an indispensable part of daily human life. However, amidst this digitalization, a significant challenge has emerged: the proliferation of hostile online discussion environments. This phenomenon has sparked a fundamental inquiry: why do online interactions consistently exhibit greater hostility than offline communication? What is the relationship between this trend and individuals' inherent aggressiveness? This paper aims to replicate and analyze data from existing studies investigating the statistical disparities in individual behavior during online and offline political discussions. Additionally, it employs secondary research to explore how individuals' levels of aggressiveness correlate with the observed differences in online and offline political discourse.
+Introduction:
+
+Since as early as 2000, there has been a desire for people to engage in political discussions anonymously through social media platforms (Dahlberg, 2001). With the rapid expansion and development of the internet, it has become extremely common for individuals to connect to it using electronic devices. By 2024, the registered user base of the leading social media platform, Instagram, had reached an astounding 2.5 billion (1). This staggering number serves as compelling evidence for the global shift into the internet era. However, along with the globalization of the internet, a series of problems arising from online interactions have become increasingly apparent, with one of the most notable being the toxic atmosphere prevalent in online discussions. Nowadays, online discussions are rife with users launching vicious attacks against each other, and according to a survey conducted in the United States, politics is one of the most contentious topics that easily sparks heated debates (Duggan, 2017). Furthermore, apart from the chaos caused by personal attacks among individual users, online trolling has also become a tool for manipulating public opinion. For instance, researchers have found that during elections, social media users engage in partisan attacks that completely overshadow substantive issues, leading to a wave of partisan confrontation (2). Today, online political hostility has been identified as a " key question for achieving impact on online harassment" (Matias, 2016, 1).
+
+Scholars have begun to analyze the reasons behind people's more hostile behavior in online communication and the psychological factors behind it. Some analysts suggest that when individuals communicate without facing someone directly, but rather in an anonymous or difficult-to-trace environment, even those who are usually friendly may find it challenging to control their emotions, especially on controversial topics (Baek, Wojcieszak, and Delli Carpini, 2012; Cheng et al., 2017; Stein, 2016). The lack of regulators and accountability mechanisms in online discussions seems to be one of the reasons for this hostility. Additionally, the flat structure of social media allows people from different social backgrounds to participate in discussions on the same political issues. Therefore, compared to offline communication, online communication is more likely to result in disagreements over political discourse, and individuals with conflicting views are more likely to encounter each other (Brundidge, 2010). In general, the characteristics of the internet and social media amplify people's emotions and increase the likelihood of political disagreements occurring.
+
+The article "The Psychology of Online Political Hostility: A Comprehensive, Cross-National Test of the Mismatch Hypothesis" analyzes the differences in people's behavior in online and offline political discussions and draws some conclusions. They collected data through online surveys in the United States and Denmark from 2018 to 2021, totaling approximately 4800 responses, and conducted a series of analyses. They found that people perceive differences between online and offline political discussions but do not necessarily believe that online political discussions are more hostile than offline ones. Furthermore, in self-assessments, people believe that they exhibit similar levels of aggression in online and offline environments and do not perceive offline political discussions to be more peaceful than online ones (Bor Alexander and Michael Bang Petersen, 2021). We noticed that their survey questionnaire, in addition to investigating online and offline discussions on political topics, also asked respondents to assess their own personalities, such as "I consider myself a calm person" or "I am an aggressive person." Therefore, we decided to replicate this article and conduct secondary research based on the data they collected.
+
+Based on the psychological viewpoints mentioned earlier and the survey results of Bor Alexander and Michael Bang Petersen, we have made an assumption: individuals with more aggressive personalities are more likely to exhibit different behaviors in online and offline political discussions, because in the unregulated world of the internet, they are more likely to display aggression beyond offline discussions. Our study primarily focuses on two aspects: (1) comparing political discussions in online and offline environments and (2) evaluating differences in the level of aggression among individuals. In summary, our article will first discuss the data sources and analysis methods used in the original paper. Then, we will conduct secondary analysis on the data from the original paper to discuss whether our hypothesis, "individuals with more aggressive personalities are more likely to exhibit different behaviors in online and offline political discussions," holds true.
+
+
+# Data
+
+## Source
+The paper used for replication is from the "American Political Science Review," which analyzed and compared the level of aggressiveness in people's online and offline political discussions, using surveys as a means of data collection (Bor Alexander and Michael Bang Petersen, 2021). Our replication aims to address a new question stemming from the original paper: whether individuals with more aggressive personalities exhibit greater differences in behavior between online and offline political discussions.
+
+## Methodology
+
+This paper will replicate the survey data originally collected for the study by Bor Alexander and Michael Bang Petersen (2021). They selected the United States and Denmark as the source of the original data, considering them to be two countries with stark differences in many aspects, thus likely to produce more credible original data (Bor Alexander and Michael Bang Petersen, 2021). The United States was characterized as a high-polarization, high-conflict, low-trust, and low-participation country, while Denmark was described as a low-polarization, low-conflict, high-trust, and high-participation country (Nelson and Shavitt, 2002). Surveys were disseminated across multiple public platforms to collect feedback from users of different platforms, aiming to obtain the most authentic responses, as some social platforms may censor highly aggressive political discourse. To reduce errors, many questions in the survey were time-bound within the past thirty days to prevent significant distortion of subjects' memories over time, which could affect the experimental results. Additionally, to better capture the intensity of emotions, questions were structured not as simple yes-or-no queries but rather required subjects to select a numerical value within a range that best corresponded to their situation. For instance, for the question "I have trouble controlling my temper," participants could choose any number within the range of 1 to 7, with higher numbers indicating a greater alignment with the description provided in the question.
+
+## Features
+
+
+
+```{r}
+#| label: fig-tab-one
+#| fig-cap: Summary of Agression and Hostile Behavior Measures in Offline and Online Political Discussions.
+#| echo: false
+
+####Make the Table####
+# Only show the top 10 rows of our table since there's more than 2000 rows in total
+raw_data_full_head <- head(raw_data_full, 10)
+
+# Convert the subset of tibble to a table using kable
+kable(raw_data_full_head)
+
+```
+```{r}
+#| label: fig-one
+#| fig-cap: Scatter Plot of Agression versus Hostile Offline Scores 
+#| echo: false
+
+####Make Figure 1####
+# Only show the top 10 rows of our table since there's more than 2000 rows in total
+# Scatter plot
+ggplot(raw_data_full, aes(x = aggression, y = hostile_offline)) +
+  geom_point() +
+  labs(x = "Agression", y = "Hostile Offline Score") 
+
+```
+
+```{r}
+#| label: fig-two
+#| fig-cap: Scatter Plot of Agression versus Hostile Online Scores 
+#| echo: false
+
+####Make Figure 1####
+# Only show the top 10 rows of our table since there's more than 2000 rows in total
+# Scatter plot
+ggplot(raw_data_full, aes(x = aggression, y = hostile_online)) +
+  geom_point() +
+  labs(x = "Agression", y = "Hostile Online Score") 
+
+```
+
+```{r}
+#| label: fig-three
+#| fig-cap: Scatter Plot of Agression versus Hostile Online Scores Minus Hostile Offline Scores
+#| echo: false
+
+####Make Figure 3####
+# Make a Scatter plot
+ggplot(raw_data_full, aes(x = aggression, y = online_offline)) +
+  geom_point(color = "skyblue", size = 3, alpha = 0.7) +  # Customize point appearance
+  geom_smooth(method = "lm", se = FALSE, color = "darkblue", linetype = "dashed") +  # Add best-fit line
+  labs(x = "Aggression", y = "Difference Between Hostile Online and Offline") +
+  theme_minimal() +  # Use a minimal theme for a professional look
+  theme(
+    axis.text = element_text(size = 12, color = "black"),  # Customize axis text size and color
+    axis.title = element_text(size = 12, color = "black", face = "bold"),  # Customize axis title size, color, and style
+    plot.title = element_text(size = 12, color = "black", face = "bold"),  # Customize plot title size, color, and style
+    panel.background = element_rect(fill = "white", color = "black"),  # Customize panel background color
+    panel.grid.major = element_line(color = "lightgray"),  # Customize major grid lines
+    panel.grid.minor = element_blank(),  # Remove minor grid lines
+    legend.position = "none"  # Remove legend
+  ) 
+
+```
